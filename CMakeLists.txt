@@ -3,4 +3,4 @@ project(cppEx3)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(cppEx3 main.cpp)
+add_executable(cppEx3 main.cpp Matrix.hpp Complex.cpp)

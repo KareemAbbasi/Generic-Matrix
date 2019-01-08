@@ -123,6 +123,33 @@ cppEx3/fast:
 	$(MAKE) -f CMakeFiles/cppEx3.dir/build.make CMakeFiles/cppEx3.dir/build
 .PHONY : cppEx3/fast
 
+Complex.o: Complex.cpp.o
+
+.PHONY : Complex.o
+
+# target to build an object file
+Complex.cpp.o:
+	$(MAKE) -f CMakeFiles/cppEx3.dir/build.make CMakeFiles/cppEx3.dir/Complex.cpp.o
+.PHONY : Complex.cpp.o
+
+Complex.i: Complex.cpp.i
+
+.PHONY : Complex.i
+
+# target to preprocess a source file
+Complex.cpp.i:
+	$(MAKE) -f CMakeFiles/cppEx3.dir/build.make CMakeFiles/cppEx3.dir/Complex.cpp.i
+.PHONY : Complex.cpp.i
+
+Complex.s: Complex.cpp.s
+
+.PHONY : Complex.s
+
+# target to generate assembly for a file
+Complex.cpp.s:
+	$(MAKE) -f CMakeFiles/cppEx3.dir/build.make CMakeFiles/cppEx3.dir/Complex.cpp.s
+.PHONY : Complex.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... cppEx3"
+	@echo "... Complex.o"
+	@echo "... Complex.i"
+	@echo "... Complex.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
