@@ -11,9 +11,11 @@ public:
     Matrix(unsigned int rows, unsigned int cols, const std::vector<T> & cells);
     //TODO Destructor.
 
-    
+    Matrix& operator= (const Matrix mat);
+    template <class U> friend Matrix<U> operator+(const Matrix<U> m1, const Matrix<U> m2);
 
     void printMat();
+    template <class U> friend Matrix<U> findTranspose(Matrix<U> mat);
 
 //TODO make private
 //private:
@@ -29,10 +31,6 @@ Matrix<T>::Matrix()
     std::vector<T> row;
     row.resize(1);
     _matrix.push_back(row);
-
-    //TODO remove this shit.
-    std::cout << _matrix.size() << _matrix.at(0).size() <<  std::endl;
-    std::cout << _matrix.at(0).at(0) << std::endl;
 }
 
 template <class T>
@@ -93,7 +91,45 @@ Matrix<T>::Matrix(unsigned int rows, unsigned int cols, const std::vector<T> &ce
     }
 }
 
+template <class T>
+Matrix<T>& Matrix<T>::operator=(const Matrix mat)
+{
+    this->_numColumns = mat._numColumns;
+    this->_numRows = mat._numRows;
+    this->_matrix.resize(_numRows);
 
+    for (unsigned i = 0; i < this->_matrix.size(); ++i)
+    {
+        this->_matrix[i].resize(_numColumns);
+        for (unsigned j = 0 ; j < this->_numColumns; ++j)
+        {
+            this->_matrix[i][j] = mat._matrix[i][j];
+        }
+    }
+    return *this;
+}
+
+template <class U>
+Matrix<U> operator+(const Matrix<U> m1, const Matrix<U> m2)
+{
+    //TODO if going to do the bonus, add the bool value
+    if (m1._numColumns != m2._numColumns || m1._numRows != m2._numRows)
+    {
+        throw "The two matrices don't have the same size!";
+    }
+
+    Matrix<U> newMatrix(m1._numRows, m1._numColumns);
+
+    for (unsigned i = 0 ; i < m1._numRows; ++i)
+    {
+        for (unsigned j = 0; j < m1._numColumns; ++j)
+        {
+            //TODO change to use operator()
+            newMatrix._matrix[i][j] = m1._matrix[i][j] + m2._matrix[i][j];
+        }
+    }
+    return newMatrix;
+}
 
 template <class T>
 void Matrix<T>::printMat()
@@ -106,4 +142,18 @@ void Matrix<T>::printMat()
         }
         std::cout << "" << std::endl;
     }
+}
+
+template <class U>
+Matrix<U> findTranspose(Matrix<U> mat)
+{
+    Matrix<U> transposedMat(mat._numColumns, mat._numRows);
+    for (unsigned i = 0; i < mat._numRows; ++i)
+    {
+        for (unsigned j = 0; j < mat._numColumns; ++j)
+        {
+            transposedMat._matrix[j][i] = mat._matrix[i][j];
+        }
+    }
+    return transposedMat;
 }
