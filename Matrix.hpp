@@ -44,16 +44,6 @@ Matrix<T>::Matrix(unsigned int rows, unsigned int cols)
     {
         _matrix[i].resize(_numColumns);
     }
-
-    //TODO remove
-    for (unsigned i = 0; i < _matrix.size(); ++i)
-    {
-        for (unsigned j = 0 ; j < _numColumns; ++j)
-        {
-            std::cout << _matrix[i][j] << " ";
-        }
-        std::cout << "" << std::endl;
-    }
 }
 
 template <class T>
