@@ -2,17 +2,25 @@
 #include "Matrix.hpp"
 #include "Complex.h"
 
+//TODO remove this line.
+using namespace std;
 int main() {
 
-    std::cout << "TEST TRANSPOSE" << std::endl;
-    Matrix<int> m1(2,4, {1,2,3,4,5,6,7,8});
-    std::cout << "The original matrix" << std::endl;
+    cout << "TESTING MATRIX MULTIPLICATION" << endl;
+    cout << "First matrix --->" << endl;
+    Matrix<int> m1(2,4 ,{1,1,1,1,1,1,1,1});
     m1.printMat();
-    std::cout << "Transposed:" << std::endl;
-    Matrix<int> nMat;
-    nMat = findTranspose(m1);
-    nMat.printMat();
 
+    cout << endl;
+    cout << "Second Matrix --->" << endl;
+    Matrix<int> m2(4,2, {1,1,1,1,0,0,0,0});
+    m2.printMat();
+
+    cout << endl;
+    cout << "Multiplication result --->" << endl;
+    Matrix<int> newMat;
+    newMat = m1*m2;
+    newMat.printMat();
 
 
     std::cout << "Hello, World!" << std::endl;

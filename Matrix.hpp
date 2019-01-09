@@ -13,6 +13,9 @@ public:
 
     Matrix& operator= (const Matrix mat);
     template <class U> friend Matrix<U> operator+(const Matrix<U> m1, const Matrix<U> m2);
+    template <class U> friend Matrix<U> operator-(const Matrix<U> m1, const Matrix<U> m2);
+    template <class U> friend Matrix<U> operator*(const Matrix<U> m1, const Matrix<U> m2);
+    static T multiplyVector(const std::vector<T> v1, const std::vector<T> v2);
 
     void printMat();
     template <class U> friend Matrix<U> findTranspose(Matrix<U> mat);
@@ -119,6 +122,60 @@ Matrix<U> operator+(const Matrix<U> m1, const Matrix<U> m2)
         }
     }
     return newMatrix;
+}
+
+template <class U>
+Matrix<U> operator-(const Matrix<U> m1, const Matrix<U> m2)
+{
+    if (m1._numColumns != m2._numColumns || m1._numRows != m2._numRows)
+    {
+        throw "The two matrices don't have the same size!";
+    }
+
+    Matrix<U> newMatrix(m1._numRows, m1._numColumns);
+    for (unsigned i = 0; i < m1._numRows; ++i)
+    {
+        for (unsigned j = 0; j < m1._numColumns; ++j)
+        {
+            //TODO change to use operator()
+            newMatrix._matrix[i][j] = m1._matrix[i][j] - m2._matrix[i][j];
+        }
+    }
+    return newMatrix;
+}
+
+template <class U>
+Matrix<U> operator*(const Matrix<U> m1, const Matrix<U> m2)
+{
+    //TODO exception m1 cols = m2 rows
+    Matrix<U> newMatrix(m1._numRows, m2._numColumns);
+    Matrix<U> transposedMat = findTranspose(m2);
+
+    for (unsigned i = 0; i < m1._numRows; ++i)
+    {
+        for (unsigned j = 0; j < m2._numColumns; ++j)
+        {
+            newMatrix._matrix[i][j] = Matrix<U>::multiplyVector(m1._matrix[i], transposedMat._matrix[j]);
+        }
+    }
+    return newMatrix;
+}
+
+template <class T>
+T Matrix<T>::multiplyVector(const std::vector<T> v1, const std::vector<T> v2)
+{
+    if (v1.size() != v2.size())
+    {
+        throw "Not same size";
+    }
+
+    T result;
+
+    for (int i = 0; i < v1.size(); ++i)
+    {
+        result += v1[i] * v2[i];
+    }
+    return result;
 }
 
 template <class T>
