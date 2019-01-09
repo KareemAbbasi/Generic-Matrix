@@ -17,6 +17,17 @@ public:
     template <class U> friend Matrix<U> operator*(const Matrix<U> m1, const Matrix<U> m2);
     static T multiplyVector(const std::vector<T> v1, const std::vector<T> v2);
 
+    template <class U> friend bool operator==(const Matrix<U> m1, const Matrix<U> m2);
+    template <class U> friend bool operator!=(const Matrix<U> m1, const Matrix<U> m2);
+
+    bool isSquareMatrix();
+    //TODO create a const and a non-const version of this method.
+    T& operator()(unsigned int row, unsigned int col);
+
+
+    template <class U> friend std::ostream& operator<<(std::ostream &out, Matrix<U> m1);
+
+
     void printMat();
     template <class U> friend Matrix<U> findTranspose(Matrix<U> mat);
 
@@ -176,6 +187,68 @@ T Matrix<T>::multiplyVector(const std::vector<T> v1, const std::vector<T> v2)
         result += v1[i] * v2[i];
     }
     return result;
+}
+
+template <class U>
+bool operator==(const Matrix<U> m1, const Matrix<U> m2)
+{
+    if (m1._numColumns != m2._numColumns || m1._numRows != m2._numRows)
+    {
+        return false;
+    }
+    else
+    {
+        for (unsigned i = 0; i < m1._numColumns; ++i)
+        {
+            for (unsigned j = 0; j < m1._numRows; ++j)
+            {
+                if (m1._matrix[i][j] != m2._matrix[i][j])
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
+template <class U>
+bool operator!=(const Matrix<U> m1, const Matrix<U> m2)
+{
+    return !(m1 == m2);
+}
+
+template <class T>
+bool Matrix<T>::isSquareMatrix()
+{
+    return this->_numRows == this->_numColumns;
+}
+
+template <class U>
+std::ostream& operator<<(std::ostream &out, Matrix<U> m1)
+{
+    for (unsigned i = 0; i < m1._matrix.size(); ++i)
+    {
+        for (unsigned j = 0 ; j < m1._numColumns; ++j)
+        {
+            out << m1._matrix[i][j] << "\t";
+        }
+        if (i < m1._numRows - 1)
+        {
+            out << "" << std::endl;
+        }
+    }
+    return out;
+}
+
+template <class T>
+T& Matrix<T>::operator()(unsigned int row, unsigned int col)
+{
+    if (row > this->_numRows || row <= 0 || col > this->_numColumns || col <= 0)
+    {
+        throw "Indexes out of range";
+    }
+    return this->_matrix[row - 1][col - 1];
 }
 
 template <class T>
