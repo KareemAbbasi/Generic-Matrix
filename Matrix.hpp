@@ -16,7 +16,8 @@ public:
             innerIterIndex(inIndex)
         {};
 
-        
+        const MatrixIterator& operator++();
+        const MatrixIterator& operator--();
 
 
 
