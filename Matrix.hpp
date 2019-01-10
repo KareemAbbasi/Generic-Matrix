@@ -5,6 +5,27 @@ template <class T>
 class Matrix
 {
 public:
+
+    class MatrixIterator : public std::iterator<std::bidirectional_iterator_tag, T>
+    {
+        friend class Matrix;
+    public:
+        MatrixIterator(std::vector<std::vector<T>> *vect, std::size_t outIndex, std::size_t inIndex):
+            vec(vect),
+            outerIterIndex(outIndex),
+            innerIterIndex(inIndex)
+        {};
+
+        
+
+
+
+    private:
+        std::vector<std::vector<T>> *vec = nullptr;
+        std::size_t outerIterIndex = 0;
+        std::size_t innerIterIndex = 0;
+    };
+
     Matrix();
     Matrix(unsigned int rows, unsigned int cols);
     Matrix(const Matrix& mat);
@@ -23,12 +44,14 @@ public:
     bool isSquareMatrix();
     //TODO create a const and a non-const version of this method.
     T& operator()(unsigned int row, unsigned int col);
+    const T& operator()(unsigned int row, unsigned int col) const;
+
+    typename std::vector<T>::const_iterator begin();
+    typename std::vector<T>::const_iterator end();
 
 
     template <class U> friend std::ostream& operator<<(std::ostream &out, Matrix<U> m1);
 
-
-    void printMat();
     template <class U> friend Matrix<U> findTranspose(Matrix<U> mat);
 
 //TODO make private
@@ -37,6 +60,12 @@ public:
     std::vector<std::vector <T>> _matrix;
 
 };
+
+/*
+ * Iterator Class
+ */
+
+
 
 template <class T>
 Matrix<T>::Matrix()
@@ -252,16 +281,13 @@ T& Matrix<T>::operator()(unsigned int row, unsigned int col)
 }
 
 template <class T>
-void Matrix<T>::printMat()
+const T& Matrix<T>::operator()(unsigned int row, unsigned int col) const
 {
-    for (unsigned i = 0; i < _matrix.size(); ++i)
+    if (row > this->_numRows || row <= 0 || col > this->_numColumns || col <= 0)
     {
-        for (unsigned j = 0 ; j < _numColumns; ++j)
-        {
-            std::cout << _matrix[i][j] << " ";
-        }
-        std::cout << "" << std::endl;
+        throw "Indexes out of range";
     }
+    return this->_matrix[row - 1][col - 1];
 }
 
 template <class U>
