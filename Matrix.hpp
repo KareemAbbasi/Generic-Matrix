@@ -1,5 +1,8 @@
 #include <vector>
 #include <iostream>
+#include <iterator>
+#include <algorithm>
+#include "Complex.h"
 
 template <class T>
 class Matrix
@@ -18,6 +21,11 @@ public:
 
         const MatrixIterator& operator++();
         const MatrixIterator& operator--();
+        const MatrixIterator operator++(int);
+        const MatrixIterator operator--(int);
+        const bool operator==(const MatrixIterator& other);
+        const bool operator!=(const MatrixIterator& other);
+
 
 
 
@@ -33,7 +41,7 @@ public:
     Matrix(unsigned int rows, unsigned int cols, const std::vector<T> & cells);
     //TODO Destructor.
 
-    Matrix& operator= (const Matrix mat);
+    Matrix<T>& operator= (const Matrix<T> mat);
     template <class U> friend Matrix<U> operator+(const Matrix<U> m1, const Matrix<U> m2);
     template <class U> friend Matrix<U> operator-(const Matrix<U> m1, const Matrix<U> m2);
     template <class U> friend Matrix<U> operator*(const Matrix<U> m1, const Matrix<U> m2);
@@ -42,14 +50,19 @@ public:
     template <class U> friend bool operator==(const Matrix<U> m1, const Matrix<U> m2);
     template <class U> friend bool operator!=(const Matrix<U> m1, const Matrix<U> m2);
 
+    Matrix<T> trans();
+    Matrix<Complex> trans();
+
     bool isSquareMatrix();
     //TODO create a const and a non-const version of this method.
     T& operator()(unsigned int row, unsigned int col);
     const T& operator()(unsigned int row, unsigned int col) const;
 
-    typename std::vector<T>::const_iterator begin();
-    typename std::vector<T>::const_iterator end();
+    MatrixIterator begin();
+    MatrixIterator end();
 
+    unsigned int rows();
+    unsigned int cols();
 
     template <class U> friend std::ostream& operator<<(std::ostream &out, Matrix<U> m1);
 
@@ -65,8 +78,72 @@ public:
 /*
  * Iterator Class
  */
+template <class T>
+const typename Matrix<T>::MatrixIterator& Matrix<T>::MatrixIterator::operator++()
+{
+    if (innerIterIndex + 1 < (*vec)[outerIterIndex].size())
+    {
+        ++innerIterIndex;
+    }
+    else
+    {
+        do
+        {
+            ++outerIterIndex;
+        } while (outerIterIndex < (*vec).size() && (*vec)[outerIterIndex].empty());
+        innerIterIndex = 0;
+    }
+    return *this;
+}
 
+template <class T>
+const typename Matrix<T>::MatrixIterator& Matrix<T>::MatrixIterator::operator--()
+{
+    if (innerIterIndex > 0)
+    {
+        --innerIterIndex;
+    }
+    else
+    {
+        do
+        {
+            --outerIterIndex;
+        } while ((*vec)[outerIterIndex].empty());
+        innerIterIndex = (*vec)[outerIterIndex].size() - 1;
+    }
+}
 
+template <class T>
+const typename Matrix<T>::MatrixIterator Matrix<T>::MatrixIterator::operator++(int)
+{
+    T retVal = *this;
+    ++(*this);
+    return retVal;
+}
+
+template <class T>
+const typename Matrix<T>::MatrixIterator Matrix<T>::MatrixIterator::operator--(int)
+{
+    T retVal = *this;
+    --(*this);
+    return retVal;
+}
+
+template <class T>
+const bool Matrix<T>::MatrixIterator::operator==(const Matrix<T>::MatrixIterator &other)
+{
+    return other.vec == vec && other.outerIterIndex == outerIterIndex && other.innerIterIndex == innerIterIndex;
+}
+
+template <class T>
+const bool Matrix<T>::MatrixIterator::operator!=(const Matrix<T>::MatrixIterator &other)
+{
+    return !(*this == other);
+}
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 
 template <class T>
 Matrix<T>::Matrix()
@@ -126,7 +203,7 @@ Matrix<T>::Matrix(unsigned int rows, unsigned int cols, const std::vector<T> &ce
 }
 
 template <class T>
-Matrix<T>& Matrix<T>::operator=(const Matrix mat)
+Matrix<T>& Matrix<T>::operator=(const Matrix<T> mat)
 {
     this->_numColumns = mat._numColumns;
     this->_numRows = mat._numRows;
@@ -249,6 +326,37 @@ bool operator!=(const Matrix<U> m1, const Matrix<U> m2)
 }
 
 template <class T>
+Matrix<T> Matrix<T>::trans()
+{
+    if (_numRows != _numColumns)
+    {
+        throw "Matrix is not square";
+    }
+    else
+    {
+        return findTranspose(this);
+    }
+}
+
+Matrix<Complex> Matrix<Complex>::trans()
+{
+    if (_numRows != _numColumns)
+    {
+        throw "Matrix is not square";
+    }
+    Matrix<Complex> newMatrix;
+    newMatrix = findTranspose(this);
+
+    for (unsigned i = 0; i < newMatrix._numRows; ++i)
+    {
+        for (unsigned j = 0; j < newMatrix._numColumns; ++j)
+        {
+            newMatrix._matrix[i][j] = newMatrix._matrix[i][j].conj();
+        }
+    }
+}
+
+template <class T>
 bool Matrix<T>::isSquareMatrix()
 {
     return this->_numRows == this->_numColumns;
@@ -289,6 +397,30 @@ const T& Matrix<T>::operator()(unsigned int row, unsigned int col) const
         throw "Indexes out of range";
     }
     return this->_matrix[row - 1][col - 1];
+}
+
+template <class T>
+typename Matrix<T>::MatrixIterator Matrix<T>::begin()
+{
+    return MatrixIterator(&_matrix, 0, 0);
+}
+
+template <class T>
+typename Matrix<T>::MatrixIterator Matrix<T>::end()
+{
+    return MatrixIterator(&_matrix, _matrix.size(), 0);
+}
+
+template <class T>
+unsigned int Matrix<T>::rows()
+{
+    return _numRows;
+}
+
+template <class T>
+unsigned int Matrix<T>::cols()
+{
+    return _numColumns;
 }
 
 template <class U>

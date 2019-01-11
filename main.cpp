@@ -8,10 +8,11 @@ int main() {
 
     Matrix<int> mat(2, 3, {1, 2, 3, 4, 5, 6});
 
-    for (auto i = mat.begin(); i != mat.end(); i++)
+    for (const auto& v : mat)
     {
-        cout << i << endl;
+
     }
+
 
 
     cout << endl;

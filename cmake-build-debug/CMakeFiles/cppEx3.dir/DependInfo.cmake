@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/cs/usr/kareem/CLionProjects/cppEx3/Complex.cpp" "/cs/usr/kareem/CLionProjects/cppEx3/cmake-build-debug/CMakeFiles/cppEx3.dir/Complex.cpp.o"
-  "/cs/usr/kareem/CLionProjects/cppEx3/main.cpp" "/cs/usr/kareem/CLionProjects/cppEx3/cmake-build-debug/CMakeFiles/cppEx3.dir/main.cpp.o"
+  "C:/Users/owner/Desktop/cppEx3/Complex.cpp" "C:/Users/owner/Desktop/cppEx3/cmake-build-debug/CMakeFiles/cppEx3.dir/Complex.cpp.obj"
+  "C:/Users/owner/Desktop/cppEx3/main.cpp" "C:/Users/owner/Desktop/cppEx3/cmake-build-debug/CMakeFiles/cppEx3.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
