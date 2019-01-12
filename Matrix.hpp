@@ -9,22 +9,28 @@ class Matrix
 {
 public:
 
-    class MatrixIterator : public std::iterator<std::bidirectional_iterator_tag, T>
+    class const_iterator : public std::iterator<std::bidirectional_iterator_tag, T>
     {
         friend class Matrix;
     public:
-        MatrixIterator(std::vector<std::vector<T>> *vect, std::size_t outIndex, std::size_t inIndex):
+//        const_iterator(): vec(_matrix), outerIterIndex(0), innerIterIndex(0) {};
+        const_iterator() = default;
+        const_iterator(std::vector<std::vector<T>> *vect, std::size_t outIndex, std::size_t inIndex):
             vec(vect),
             outerIterIndex(outIndex),
             innerIterIndex(inIndex)
         {};
 
-        const MatrixIterator& operator++();
-        const MatrixIterator& operator--();
-        const MatrixIterator operator++(int);
-        const MatrixIterator operator--(int);
-        const bool operator==(const MatrixIterator& other);
-        const bool operator!=(const MatrixIterator& other);
+        const const_iterator& operator++();
+        const const_iterator& operator--();
+        const const_iterator operator++(int);
+        const const_iterator operator--(int);
+        const bool operator==(const const_iterator& other);
+        const bool operator!=(const const_iterator& other);
+        const T& operator*() const;
+        T& operator*();
+        const T& operator->() const;
+        T& operator->();
 
 
 
@@ -50,16 +56,18 @@ public:
     template <class U> friend bool operator==(const Matrix<U> m1, const Matrix<U> m2);
     template <class U> friend bool operator!=(const Matrix<U> m1, const Matrix<U> m2);
 
+
+    //TODO test these functions.
     Matrix<T> trans();
-    Matrix<Complex> trans();
+//    template<> Matrix<Complex> trans();
 
     bool isSquareMatrix();
     //TODO create a const and a non-const version of this method.
     T& operator()(unsigned int row, unsigned int col);
     const T& operator()(unsigned int row, unsigned int col) const;
 
-    MatrixIterator begin();
-    MatrixIterator end();
+    const_iterator begin();
+    const_iterator end();
 
     unsigned int rows();
     unsigned int cols();
@@ -78,8 +86,15 @@ public:
 /*
  * Iterator Class
  */
+
+//template <class T>
+//Matrix<T>::const_iterator::const_iterator()
+//{
+//
+//}
+
 template <class T>
-const typename Matrix<T>::MatrixIterator& Matrix<T>::MatrixIterator::operator++()
+const typename Matrix<T>::const_iterator& Matrix<T>::const_iterator::operator++()
 {
     if (innerIterIndex + 1 < (*vec)[outerIterIndex].size())
     {
@@ -97,7 +112,7 @@ const typename Matrix<T>::MatrixIterator& Matrix<T>::MatrixIterator::operator++(
 }
 
 template <class T>
-const typename Matrix<T>::MatrixIterator& Matrix<T>::MatrixIterator::operator--()
+const typename Matrix<T>::const_iterator& Matrix<T>::const_iterator::operator--()
 {
     if (innerIterIndex > 0)
     {
@@ -114,7 +129,7 @@ const typename Matrix<T>::MatrixIterator& Matrix<T>::MatrixIterator::operator--(
 }
 
 template <class T>
-const typename Matrix<T>::MatrixIterator Matrix<T>::MatrixIterator::operator++(int)
+const typename Matrix<T>::const_iterator Matrix<T>::const_iterator::operator++(int)
 {
     T retVal = *this;
     ++(*this);
@@ -122,7 +137,7 @@ const typename Matrix<T>::MatrixIterator Matrix<T>::MatrixIterator::operator++(i
 }
 
 template <class T>
-const typename Matrix<T>::MatrixIterator Matrix<T>::MatrixIterator::operator--(int)
+const typename Matrix<T>::const_iterator Matrix<T>::const_iterator::operator--(int)
 {
     T retVal = *this;
     --(*this);
@@ -130,15 +145,39 @@ const typename Matrix<T>::MatrixIterator Matrix<T>::MatrixIterator::operator--(i
 }
 
 template <class T>
-const bool Matrix<T>::MatrixIterator::operator==(const Matrix<T>::MatrixIterator &other)
+const bool Matrix<T>::const_iterator::operator==(const Matrix<T>::const_iterator &other)
 {
     return other.vec == vec && other.outerIterIndex == outerIterIndex && other.innerIterIndex == innerIterIndex;
 }
 
 template <class T>
-const bool Matrix<T>::MatrixIterator::operator!=(const Matrix<T>::MatrixIterator &other)
+const bool Matrix<T>::const_iterator::operator!=(const Matrix<T>::const_iterator &other)
 {
     return !(*this == other);
+}
+
+template <class T>
+const T& Matrix<T>::const_iterator::operator*() const
+{
+    return *this;
+}
+
+template <class T>
+T& Matrix<T>::const_iterator::operator*()
+{
+    return (*vec)[outerIterIndex][innerIterIndex];
+}
+
+template <class T>
+const T& Matrix<T>::const_iterator::operator->() const
+{
+    return *this;
+}
+
+template <class T>
+T& Matrix<T>::const_iterator::operator->()
+{
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////
@@ -334,10 +373,11 @@ Matrix<T> Matrix<T>::trans()
     }
     else
     {
-        return findTranspose(this);
+        return findTranspose(*this);
     }
 }
 
+template <>
 Matrix<Complex> Matrix<Complex>::trans()
 {
     if (_numRows != _numColumns)
@@ -345,7 +385,7 @@ Matrix<Complex> Matrix<Complex>::trans()
         throw "Matrix is not square";
     }
     Matrix<Complex> newMatrix;
-    newMatrix = findTranspose(this);
+    newMatrix = findTranspose(*this);
 
     for (unsigned i = 0; i < newMatrix._numRows; ++i)
     {
@@ -354,6 +394,7 @@ Matrix<Complex> Matrix<Complex>::trans()
             newMatrix._matrix[i][j] = newMatrix._matrix[i][j].conj();
         }
     }
+    return newMatrix;
 }
 
 template <class T>
@@ -400,15 +441,15 @@ const T& Matrix<T>::operator()(unsigned int row, unsigned int col) const
 }
 
 template <class T>
-typename Matrix<T>::MatrixIterator Matrix<T>::begin()
+typename Matrix<T>::const_iterator Matrix<T>::begin()
 {
-    return MatrixIterator(&_matrix, 0, 0);
+    return const_iterator(&_matrix, 0, 0);
 }
 
 template <class T>
-typename Matrix<T>::MatrixIterator Matrix<T>::end()
+typename Matrix<T>::const_iterator Matrix<T>::end()
 {
-    return MatrixIterator(&_matrix, _matrix.size(), 0);
+    return const_iterator(&_matrix, _matrix.size(), 0);
 }
 
 template <class T>

@@ -1,3 +1,1 @@
-"C:\Program Files\JetBrains\CLion 2018.2.5\bin\cmake\win\bin\cmake.exe" -E remove -f CMakeFiles\cppEx3.dir/objects.a
-C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\ar.exe cr CMakeFiles\cppEx3.dir/objects.a @CMakeFiles\cppEx3.dir\objects1.rsp
-C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE -g   -Wl,--whole-archive CMakeFiles\cppEx3.dir/objects.a -Wl,--no-whole-archive  -o cppEx3.exe -Wl,--out-implib,libcppEx3.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\cppEx3.dir\linklibs.rsp
+/usr/bin/c++  -g   CMakeFiles/cppEx3.dir/main.cpp.o CMakeFiles/cppEx3.dir/Complex.cpp.o CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.o  -o cppEx3 

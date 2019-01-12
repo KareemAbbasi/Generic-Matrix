@@ -4,18 +4,22 @@
 
 //TODO remove this line.
 using namespace std;
-int main() {
 
-    Matrix<int> mat(2, 3, {1, 2, 3, 4, 5, 6});
-
-    for (const auto& v : mat)
-    {
-
-    }
-
-
-
-    cout << endl;
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+template <class T>
+void foo(T t)
+{
+    cout << "T function " << t << endl;
 }
+
+template <>
+void foo<int>(int t)
+{
+    cout << "int funtcion " << t << endl;
+}
+
+//int main() {
+//
+//    cout << endl;
+//    std::cout << "Hello, World!" << std::endl;
+//    return 0;
+//}
