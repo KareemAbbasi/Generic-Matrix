@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/cppEx3.dir/main.cpp.o"
   "CMakeFiles/cppEx3.dir/Complex.cpp.o"
-  "CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.o"
+  "CMakeFiles/cppEx3.dir/TimeChecker.cpp.o"
   "cppEx3.pdb"
   "cppEx3"
 )

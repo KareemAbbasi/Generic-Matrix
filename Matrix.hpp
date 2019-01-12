@@ -45,7 +45,9 @@ public:
     Matrix(unsigned int rows, unsigned int cols);
     Matrix(const Matrix& mat);
     Matrix(unsigned int rows, unsigned int cols, const std::vector<T> & cells);
-    //TODO Destructor.
+
+    //TODO check if destructor ok.
+    ~Matrix() = default;
 
     Matrix<T>& operator= (const Matrix<T> mat);
     template <class U> friend Matrix<U> operator+(const Matrix<U> m1, const Matrix<U> m2);
@@ -58,8 +60,7 @@ public:
 
 
     //TODO test these functions.
-    Matrix<T> trans();
-//    template<> Matrix<Complex> trans();
+    Matrix<T> trans() const;
 
     bool isSquareMatrix();
     //TODO create a const and a non-const version of this method.
@@ -82,6 +83,10 @@ public:
     std::vector<std::vector <T>> _matrix;
 
 };
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 
 /*
  * Iterator Class
@@ -365,7 +370,7 @@ bool operator!=(const Matrix<U> m1, const Matrix<U> m2)
 }
 
 template <class T>
-Matrix<T> Matrix<T>::trans()
+Matrix<T> Matrix<T>::trans() const
 {
     if (_numRows != _numColumns)
     {
@@ -377,25 +382,27 @@ Matrix<T> Matrix<T>::trans()
     }
 }
 
-template <>
-Matrix<Complex> Matrix<Complex>::trans()
-{
-    if (_numRows != _numColumns)
-    {
-        throw "Matrix is not square";
-    }
-    Matrix<Complex> newMatrix;
-    newMatrix = findTranspose(*this);
 
-    for (unsigned i = 0; i < newMatrix._numRows; ++i)
-    {
-        for (unsigned j = 0; j < newMatrix._numColumns; ++j)
-        {
-            newMatrix._matrix[i][j] = newMatrix._matrix[i][j].conj();
-        }
-    }
-    return newMatrix;
-}
+//TODO make this work!!!
+//template <>
+//Matrix<Complex> Matrix<Complex>::trans() const
+//{
+//    if (_numRows != _numColumns)
+//    {
+//        throw "Matrix is not square";
+//    }
+//    Matrix<Complex> newMatrix;
+//    newMatrix = findTranspose(*this);
+//
+//    for (unsigned i = 0; i < newMatrix._numRows; ++i)
+//    {
+//        for (unsigned j = 0; j < newMatrix._numColumns; ++j)
+//        {
+//            newMatrix._matrix[i][j] = newMatrix._matrix[i][j].conj();
+//        }
+//    }
+//    return newMatrix;
+//}
 
 template <class T>
 bool Matrix<T>::isSquareMatrix()
