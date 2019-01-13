@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories($(EIGEN_DIR))
 
-add_executable(cppEx3 main.cpp Matrix.hpp Complex.cpp GenericMatrixDriver.cpp)
+add_executable(cppEx3 Matrix.hpp Complex.cpp TimeChecker.cpp)

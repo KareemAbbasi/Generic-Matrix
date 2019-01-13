@@ -651,6 +651,11 @@ template <class U>
 Matrix<U> operator*(const Matrix<U> m1, const Matrix<U> m2)
 {
     //TODO exception m1 cols = m2 rows
+    if (m1._numColumns != m2._numRows)
+    {
+        throw diffSizeEx;
+    }
+
     Matrix<U> newMatrix(m1._numRows, m2._numColumns);
     Matrix<U> transposedMat = findTranspose(m2);
 

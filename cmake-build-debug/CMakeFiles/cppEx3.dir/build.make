@@ -57,22 +57,9 @@ include CMakeFiles/cppEx3.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/cppEx3.dir/flags.make
 
-CMakeFiles/cppEx3.dir/main.cpp.o: CMakeFiles/cppEx3.dir/flags.make
-CMakeFiles/cppEx3.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cs/usr/kareem/CLionProjects/cppEx3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/cppEx3.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cppEx3.dir/main.cpp.o -c /cs/usr/kareem/CLionProjects/cppEx3/main.cpp
-
-CMakeFiles/cppEx3.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cppEx3.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cs/usr/kareem/CLionProjects/cppEx3/main.cpp > CMakeFiles/cppEx3.dir/main.cpp.i
-
-CMakeFiles/cppEx3.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cppEx3.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cs/usr/kareem/CLionProjects/cppEx3/main.cpp -o CMakeFiles/cppEx3.dir/main.cpp.s
-
 CMakeFiles/cppEx3.dir/Complex.cpp.o: CMakeFiles/cppEx3.dir/flags.make
 CMakeFiles/cppEx3.dir/Complex.cpp.o: ../Complex.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cs/usr/kareem/CLionProjects/cppEx3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/cppEx3.dir/Complex.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cs/usr/kareem/CLionProjects/cppEx3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/cppEx3.dir/Complex.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cppEx3.dir/Complex.cpp.o -c /cs/usr/kareem/CLionProjects/cppEx3/Complex.cpp
 
 CMakeFiles/cppEx3.dir/Complex.cpp.i: cmake_force
@@ -83,34 +70,32 @@ CMakeFiles/cppEx3.dir/Complex.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cppEx3.dir/Complex.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cs/usr/kareem/CLionProjects/cppEx3/Complex.cpp -o CMakeFiles/cppEx3.dir/Complex.cpp.s
 
-CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.o: CMakeFiles/cppEx3.dir/flags.make
-CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.o: ../GenericMatrixDriver.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cs/usr/kareem/CLionProjects/cppEx3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.o -c /cs/usr/kareem/CLionProjects/cppEx3/GenericMatrixDriver.cpp
+CMakeFiles/cppEx3.dir/TimeChecker.cpp.o: CMakeFiles/cppEx3.dir/flags.make
+CMakeFiles/cppEx3.dir/TimeChecker.cpp.o: ../TimeChecker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cs/usr/kareem/CLionProjects/cppEx3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/cppEx3.dir/TimeChecker.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/cppEx3.dir/TimeChecker.cpp.o -c /cs/usr/kareem/CLionProjects/cppEx3/TimeChecker.cpp
 
-CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cs/usr/kareem/CLionProjects/cppEx3/GenericMatrixDriver.cpp > CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.i
+CMakeFiles/cppEx3.dir/TimeChecker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cppEx3.dir/TimeChecker.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cs/usr/kareem/CLionProjects/cppEx3/TimeChecker.cpp > CMakeFiles/cppEx3.dir/TimeChecker.cpp.i
 
-CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cs/usr/kareem/CLionProjects/cppEx3/GenericMatrixDriver.cpp -o CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.s
+CMakeFiles/cppEx3.dir/TimeChecker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cppEx3.dir/TimeChecker.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cs/usr/kareem/CLionProjects/cppEx3/TimeChecker.cpp -o CMakeFiles/cppEx3.dir/TimeChecker.cpp.s
 
 # Object files for target cppEx3
 cppEx3_OBJECTS = \
-"CMakeFiles/cppEx3.dir/main.cpp.o" \
 "CMakeFiles/cppEx3.dir/Complex.cpp.o" \
-"CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.o"
+"CMakeFiles/cppEx3.dir/TimeChecker.cpp.o"
 
 # External object files for target cppEx3
 cppEx3_EXTERNAL_OBJECTS =
 
-cppEx3: CMakeFiles/cppEx3.dir/main.cpp.o
 cppEx3: CMakeFiles/cppEx3.dir/Complex.cpp.o
-cppEx3: CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.o
+cppEx3: CMakeFiles/cppEx3.dir/TimeChecker.cpp.o
 cppEx3: CMakeFiles/cppEx3.dir/build.make
 cppEx3: CMakeFiles/cppEx3.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cs/usr/kareem/CLionProjects/cppEx3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable cppEx3"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cs/usr/kareem/CLionProjects/cppEx3/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable cppEx3"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cppEx3.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

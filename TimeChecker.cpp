@@ -16,14 +16,19 @@
 #include "Complex.h"
 #include "Matrix.hpp"
 
-
+/**
+ * Checks the running time.
+ * @param argc
+ * @param argv
+ * @return
+ */
 int main(int argc, char **argv)
 {
     std::stack<std::chrono::time_point<std::chrono::system_clock>> tictoc_stack;
     if (argc > 1)
     {
         int matSize = std::stoi(argv[1]);
-        if (matSize >=1 && matSize <= 500)
+        if (matSize >= 1 && matSize <= 500)
         {
             std::vector<int> v(250000, 40);
             std::vector<std::vector<int>> v1(500, v);
