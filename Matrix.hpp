@@ -1,8 +1,29 @@
+#ifndef MATRIX_HPP
+#define MATRIX_HPP
+
 #include <vector>
 #include <iostream>
 #include <iterator>
 #include <algorithm>
 #include "Complex.h"
+#include <stdexcept>
+#include <exception>
+
+class DifferentSizeException: public std::exception
+{
+    virtual const char* what() const throw()
+    {
+        return "The two matrices don't have the same size!";
+    }
+} diffSizeEx;
+
+class NotSquareException: public std::exception
+{
+    virtual const char* what() const throw()
+    {
+        return "Matrix is not square!";
+    }
+} notSquareEx;
 
 template <class T>
 class Matrix
@@ -13,7 +34,6 @@ public:
     {
         friend class Matrix;
     public:
-//        const_iterator(): vec(_matrix), outerIterIndex(0), innerIterIndex(0) {};
         const_iterator() = default;
         const_iterator(std::vector<std::vector<T>> *vect, std::size_t outIndex, std::size_t inIndex):
             vec(vect),
@@ -31,9 +51,6 @@ public:
         T& operator*();
         const T& operator->() const;
         T& operator->();
-
-
-
 
     private:
         std::vector<std::vector<T>> *vec = nullptr;
@@ -270,7 +287,7 @@ Matrix<U> operator+(const Matrix<U> m1, const Matrix<U> m2)
     //TODO if going to do the bonus, add the bool value
     if (m1._numColumns != m2._numColumns || m1._numRows != m2._numRows)
     {
-        throw "The two matrices don't have the same size!";
+        throw diffSizeEx;
     }
 
     Matrix<U> newMatrix(m1._numRows, m1._numColumns);
@@ -291,7 +308,7 @@ Matrix<U> operator-(const Matrix<U> m1, const Matrix<U> m2)
 {
     if (m1._numColumns != m2._numColumns || m1._numRows != m2._numRows)
     {
-        throw "The two matrices don't have the same size!";
+        throw diffSizeEx;
     }
 
     Matrix<U> newMatrix(m1._numRows, m1._numColumns);
@@ -328,7 +345,7 @@ T Matrix<T>::multiplyVector(const std::vector<T> v1, const std::vector<T> v2)
 {
     if (v1.size() != v2.size())
     {
-        throw "Not same size";
+        throw diffSizeEx;
     }
 
     T result;
@@ -374,7 +391,7 @@ Matrix<T> Matrix<T>::trans() const
 {
     if (_numRows != _numColumns)
     {
-        throw "Matrix is not square";
+        throw notSquareEx;
     }
     else
     {
@@ -384,25 +401,25 @@ Matrix<T> Matrix<T>::trans() const
 
 
 //TODO make this work!!!
-//template <>
-//Matrix<Complex> Matrix<Complex>::trans() const
-//{
-//    if (_numRows != _numColumns)
-//    {
-//        throw "Matrix is not square";
-//    }
-//    Matrix<Complex> newMatrix;
-//    newMatrix = findTranspose(*this);
-//
-//    for (unsigned i = 0; i < newMatrix._numRows; ++i)
-//    {
-//        for (unsigned j = 0; j < newMatrix._numColumns; ++j)
-//        {
-//            newMatrix._matrix[i][j] = newMatrix._matrix[i][j].conj();
-//        }
-//    }
-//    return newMatrix;
-//}
+template <>
+Matrix<Complex> Matrix<Complex>::trans() const
+{
+    if (_numRows != _numColumns)
+    {
+        throw notSquareEx;
+    }
+    Matrix<Complex> newMatrix;
+    newMatrix = findTranspose(*this);
+
+    for (unsigned i = 0; i < newMatrix._numRows; ++i)
+    {
+        for (unsigned j = 0; j < newMatrix._numColumns; ++j)
+        {
+            newMatrix._matrix[i][j] = newMatrix._matrix[i][j].conj();
+        }
+    }
+    return newMatrix;
+}
 
 template <class T>
 bool Matrix<T>::isSquareMatrix()
@@ -419,10 +436,8 @@ std::ostream& operator<<(std::ostream &out, Matrix<U> m1)
         {
             out << m1._matrix[i][j] << "\t";
         }
-        if (i < m1._numRows - 1)
-        {
-            out << "" << std::endl;
-        }
+        out << "" << std::endl;
+
     }
     return out;
 }
@@ -432,7 +447,7 @@ T& Matrix<T>::operator()(unsigned int row, unsigned int col)
 {
     if (row > this->_numRows || row <= 0 || col > this->_numColumns || col <= 0)
     {
-        throw "Indexes out of range";
+        throw std::out_of_range("");
     }
     return this->_matrix[row - 1][col - 1];
 }
@@ -442,7 +457,7 @@ const T& Matrix<T>::operator()(unsigned int row, unsigned int col) const
 {
     if (row > this->_numRows || row <= 0 || col > this->_numColumns || col <= 0)
     {
-        throw "Indexes out of range";
+        throw std::out_of_range("");
     }
     return this->_matrix[row - 1][col - 1];
 }
@@ -484,3 +499,5 @@ Matrix<U> findTranspose(Matrix<U> mat)
     }
     return transposedMat;
 }
+
+#endif

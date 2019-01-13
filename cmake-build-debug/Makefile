@@ -150,32 +150,32 @@ Complex.cpp.s:
 	$(MAKE) -f CMakeFiles/cppEx3.dir/build.make CMakeFiles/cppEx3.dir/Complex.cpp.s
 .PHONY : Complex.cpp.s
 
-TimeChecker.o: TimeChecker.cpp.o
+GenericMatrixDriver.o: GenericMatrixDriver.cpp.o
 
-.PHONY : TimeChecker.o
+.PHONY : GenericMatrixDriver.o
 
 # target to build an object file
-TimeChecker.cpp.o:
-	$(MAKE) -f CMakeFiles/cppEx3.dir/build.make CMakeFiles/cppEx3.dir/TimeChecker.cpp.o
-.PHONY : TimeChecker.cpp.o
+GenericMatrixDriver.cpp.o:
+	$(MAKE) -f CMakeFiles/cppEx3.dir/build.make CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.o
+.PHONY : GenericMatrixDriver.cpp.o
 
-TimeChecker.i: TimeChecker.cpp.i
+GenericMatrixDriver.i: GenericMatrixDriver.cpp.i
 
-.PHONY : TimeChecker.i
+.PHONY : GenericMatrixDriver.i
 
 # target to preprocess a source file
-TimeChecker.cpp.i:
-	$(MAKE) -f CMakeFiles/cppEx3.dir/build.make CMakeFiles/cppEx3.dir/TimeChecker.cpp.i
-.PHONY : TimeChecker.cpp.i
+GenericMatrixDriver.cpp.i:
+	$(MAKE) -f CMakeFiles/cppEx3.dir/build.make CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.i
+.PHONY : GenericMatrixDriver.cpp.i
 
-TimeChecker.s: TimeChecker.cpp.s
+GenericMatrixDriver.s: GenericMatrixDriver.cpp.s
 
-.PHONY : TimeChecker.s
+.PHONY : GenericMatrixDriver.s
 
 # target to generate assembly for a file
-TimeChecker.cpp.s:
-	$(MAKE) -f CMakeFiles/cppEx3.dir/build.make CMakeFiles/cppEx3.dir/TimeChecker.cpp.s
-.PHONY : TimeChecker.cpp.s
+GenericMatrixDriver.cpp.s:
+	$(MAKE) -f CMakeFiles/cppEx3.dir/build.make CMakeFiles/cppEx3.dir/GenericMatrixDriver.cpp.s
+.PHONY : GenericMatrixDriver.cpp.s
 
 main.o: main.cpp.o
 
@@ -216,9 +216,9 @@ help:
 	@echo "... Complex.o"
 	@echo "... Complex.i"
 	@echo "... Complex.s"
-	@echo "... TimeChecker.o"
-	@echo "... TimeChecker.i"
-	@echo "... TimeChecker.s"
+	@echo "... GenericMatrixDriver.o"
+	@echo "... GenericMatrixDriver.i"
+	@echo "... GenericMatrixDriver.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
