@@ -30,21 +30,21 @@ int main(int argc, char **argv)
         int matSize = std::stoi(argv[1]);
         if (matSize >= 1 && matSize <= 500)
         {
-            std::vector<int> v(250000, 40);
-            std::vector<std::vector<int>> v1(500, v);
+            std::cout << "size " << matSize << std::endl;
 
             Eigen::MatrixXd m1 = Eigen::MatrixXd::Random(matSize, matSize);
             Eigen::MatrixXd m2 = Eigen::MatrixXd::Random(matSize, matSize);
 
-            Matrix<int> normalMat1(500, 500, v);
-            Matrix<int> normalMat2(500, 500, v);
+            std::vector<int> v(250000, 1);
+            std::vector<std::vector<int>> v1(500, v);
 
+            Matrix<int> normalMat1(500, 500, v);
 
             //EIGEN MULT
             tictoc_stack.push(std::chrono::system_clock::now());
             Eigen::MatrixXd multM = m1 * m2;
             std::chrono::duration<double> multTime = std::chrono::system_clock::now() - tictoc_stack.top();
-            std::cout << "eigen mult: " << multTime.count() << "sec\n";
+            std::cout << "eigen mult " << multTime.count() << std::endl;
             tictoc_stack.pop();
 
 
@@ -52,27 +52,26 @@ int main(int argc, char **argv)
             tictoc_stack.push(std::chrono::system_clock::now());
             Eigen::MatrixXd addM = m1 + m2;
             std::chrono::duration<double> addTime = std::chrono::system_clock::now() - tictoc_stack.top();
-            std::cout << "eigen add: " << addTime.count() << "sec\n";
+            std::cout << "eigen add " << addTime.count() << std::endl;
             tictoc_stack.pop();
 
 
             //NORMAL MULT
             tictoc_stack.push(std::chrono::system_clock::now());
             Matrix<int> multNormal;
-            multNormal = normalMat1 * normalMat2;
+            multNormal = normalMat1 * normalMat1;
             std::chrono::duration<double> multTimeNormal = std::chrono::system_clock::now() - tictoc_stack.top();
-            std::cout << "normal mult: " << multTimeNormal.count() << "sec\n";
+            std::cout << "matlib mult " << multTimeNormal.count() << std::endl;
             tictoc_stack.pop();
 
 
             //NORMAL ADD
             tictoc_stack.push(std::chrono::system_clock::now());
             Matrix<int> addNormal;
-            addNormal = normalMat1 + normalMat2;
+            addNormal = normalMat1 + normalMat1;
             std::chrono::duration<double> addTimeNormal = std::chrono::system_clock::now() - tictoc_stack.top();
-            std::cout << "normal mult: " << addTimeNormal.count() << "sec\n";
+            std::cout << "matlib add " << addTimeNormal.count() << std::endl;
             tictoc_stack.pop();
-
         }
     }
 }

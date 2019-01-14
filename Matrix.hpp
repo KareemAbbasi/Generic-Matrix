@@ -114,14 +114,14 @@ public:
          * @param other the other value.
          * @return True if equal, false otherwise.
          */
-        const bool operator==(const const_iterator& other);
+        bool operator==(const const_iterator& other);
 
         /**
          * Compares two values of the iterator.
          * @param other the other value.
          * @return True if not equal, false otherwise.
          */
-        const bool operator!=(const const_iterator& other);
+        bool operator!=(const const_iterator& other);
 
         /**
          * Access the value stored in iterator.
@@ -422,7 +422,7 @@ const typename Matrix<T>::const_iterator Matrix<T>::const_iterator::operator--(i
  * @return True if equal, false otherwise.
  */
 template <class T>
-const bool Matrix<T>::const_iterator::operator==(const Matrix<T>::const_iterator &other)
+bool Matrix<T>::const_iterator::operator==(const Matrix<T>::const_iterator &other)
 {
     return other.vec == vec && other.outerIterIndex == outerIterIndex && other.innerIterIndex == innerIterIndex;
 }
@@ -433,7 +433,7 @@ const bool Matrix<T>::const_iterator::operator==(const Matrix<T>::const_iterator
  * @return True if not equal, false otherwise.
  */
 template <class T>
-const bool Matrix<T>::const_iterator::operator!=(const Matrix<T>::const_iterator &other)
+bool Matrix<T>::const_iterator::operator!=(const Matrix<T>::const_iterator &other)
 {
     return !(*this == other);
 }
@@ -685,7 +685,7 @@ T Matrix<T>::multiplyVector(const std::vector<T> v1, const std::vector<T> v2)
 
     T result;
 
-    for (int i = 0; i < v1.size(); ++i)
+    for (unsigned i = 0; i < v1.size(); ++i)
     {
         result += v1[i] * v2[i];
     }
