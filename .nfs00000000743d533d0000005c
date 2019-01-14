@@ -193,6 +193,7 @@ public:
      */
     Matrix(unsigned int rows, unsigned int cols, const std::vector<T> & cells);
 
+    //TODO check if destructor ok.
     /**
      * Destructor of the Matrix.
      */
@@ -258,6 +259,8 @@ public:
      */
     template <class U> friend bool operator!=(const Matrix<U> m1, const Matrix<U> m2);
 
+
+    //TODO test these functions.
     /**
      * Find the transposed matrix of the current matix.
      * @return A new matrix which is the transposed matrix.
@@ -269,6 +272,7 @@ public:
      */
     bool isSquareMatrix();
 
+    //TODO create a const and a non-const version of this method.
     /**
      * Access operator.
      * @param row the index of the row we want to access.
@@ -546,21 +550,13 @@ Matrix<T>::Matrix(unsigned int rows, unsigned int cols, const std::vector<T> &ce
     _numRows = rows;
     _matrix.resize(_numRows);
 
-
-
     for (unsigned i = 0; i < _matrix.size(); ++i)
     {
         _matrix[i].resize(_numColumns);
         for (unsigned j = 0; j < _numColumns; ++j)
         {
-            try
-            {
-                _matrix[i][j] = cells.at(j + i * _numColumns);
-            }
-            catch (std::out_of_range& e)
-            {
-                _matrix[i][j] = T();
-            }
+            //TODO check if cells doesn't have values in the current index, maybe using exceptions.
+            _matrix[i][j] = cells[j + i * _numColumns];
         }
     }
 }
@@ -598,6 +594,7 @@ Matrix<T>& Matrix<T>::operator=(const Matrix<T> mat)
 template <class U>
 Matrix<U> operator+(const Matrix<U> m1, const Matrix<U> m2)
 {
+    //TODO if going to do the bonus, add the bool value
     if (m1._numColumns != m2._numColumns || m1._numRows != m2._numRows)
     {
         throw diffSizeEx;
@@ -609,6 +606,7 @@ Matrix<U> operator+(const Matrix<U> m1, const Matrix<U> m2)
     {
         for (unsigned j = 0; j < m1._numColumns; ++j)
         {
+            //TODO change to use operator()
             newMatrix._matrix[i][j] = m1._matrix[i][j] + m2._matrix[i][j];
         }
     }
@@ -635,6 +633,7 @@ Matrix<U> operator-(const Matrix<U> m1, const Matrix<U> m2)
     {
         for (unsigned j = 0; j < m1._numColumns; ++j)
         {
+            //TODO change to use operator()
             newMatrix._matrix[i][j] = m1._matrix[i][j] - m2._matrix[i][j];
         }
     }
@@ -651,6 +650,7 @@ Matrix<U> operator-(const Matrix<U> m1, const Matrix<U> m2)
 template <class U>
 Matrix<U> operator*(const Matrix<U> m1, const Matrix<U> m2)
 {
+    //TODO exception m1 cols = m2 rows
     if (m1._numColumns != m2._numRows)
     {
         throw diffSizeEx;

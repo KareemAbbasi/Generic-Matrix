@@ -12,3 +12,16 @@
 -----------------------------------------------------------------
 
 
+My implementation of the Matrix<T> class always performs the tasks in the same time
+frame and the running time is not affected by the size of the matrix.
+Whereas in the Eigen library, the running time is proportional to the size of the matrix,
+it increases when the size increases.
+
+The Eigen library supports SSE2 which can perform computations on packets of 128 bits at once.
+Since the size of int is 4 bytes (which is 32 bits), the library can perform computations on
+4 ints at the same time which can make the running time 4 times faster. And that is the reason
+why it is faster most of the times.
+
+The addition operation is faster since it uses two loops to traverse over the matrices. Whereas
+the multiplication operation uses two loops to find the row and column we want to multiply and
+then uses a third loop to find the result of their multiplication.
